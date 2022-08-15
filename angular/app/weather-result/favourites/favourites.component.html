@@ -1,0 +1,58 @@
+<br>
+
+<div class="container">
+    <div class="col-sm-12">
+
+
+        <div *ngIf=(hasData) id="fav">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">City</th>
+                        <th scope="col">State</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let column of storedValue; index as i">
+                        <td scope="row">
+                            {{ i + 1 }}
+                        </td>
+                        <td>
+
+                            <a href='javascript:;' (click)="redirect()" style="color:blue"><u>{{column.city}}</u></a>
+                        </td>
+
+                        <td>
+                            <a href='javascript:;' (click)="redirect()" style="color:blue"><u>{{column.state}}</u></a>
+                        </td>
+                        <td>
+
+                            <button class="btn btn-sm" (click)=removeData(column) style="border: none;">
+                                <span><i class="bi bi-trash-fill"></i></span>
+                            </button>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <div *ngIf=(!hasData)>
+        <ngb-alert class="col-sm-12" [dismissible]="false">
+            <strong>Sorry!</strong> No records found.
+        </ngb-alert>
+    </div>
+    <div style="height: 50px;">
+    </div>
+
+
+</div>

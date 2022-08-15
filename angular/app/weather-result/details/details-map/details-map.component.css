@@ -1,0 +1,6 @@
+.full{
+    height:  50vw;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5%;
+}

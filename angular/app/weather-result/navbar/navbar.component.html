@@ -1,0 +1,144 @@
+<div *ngIf="showError">
+    <div class="container">
+        <ngb-alert type="danger" class="col-sm-12" [dismissible]="false">
+            <strong>An error occured, please try again later </strong>
+        </ngb-alert>
+    </div>
+</div>
+
+<div *ngIf="hasData" id="main-result">
+
+    <div class="container">
+
+        <div *ngIf="!detailShow" id='view1' style="margin-bottom:5%" class="col-sm-12">
+
+            <div>
+                <div style="text-align:center;"><b>Forecast at {{resultData.location.city}},
+                        {{resultData.location.state}}</b>
+                </div>
+                <br>
+                <br>
+                <button class="btn-sm mr-2"
+                    style="margin-left: 2%; margin-right: 2%; float: right; border: none;background-color: rgb(255, 255, 255);"
+                    [disabled]="handleDetailButton()" (click)="handleDetails()"> Details <span class="material-icons"
+                        style="vertical-align: bottom;">
+                        chevron_right
+                    </span>
+                </button>
+
+                <button class="btn-sm mr-2" style='float: right; background-color: white;' (click)="saveData()">
+                    <span *ngIf="!starChecked" class="material-icons" style="vertical-align: bottom;">
+                        star_border
+                    </span>
+                    <span *ngIf="starChecked" class="material-icons"
+                        style="vertical-align: bottom; color: rgb(240, 204, 88);">
+                        star
+                    </span>
+                </button>
+            </div>
+            <br>
+            <br>
+
+            <div class="col col-sm-12">
+                <ul ngbNav #nav="ngbNav" class="nav-tabs small" style="display: flex;justify-content: right;">
+                    <li ngbNavItem>
+                        <a ngbNavLink><small>Day View</small></a>
+                        <ng-template ngbNavContent>
+                            <br>
+                            <div>
+                                <div class="table-responsive-sm">
+
+                                    <table class="table table-hover small">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Temp. High (°F)</th>
+                                                <th scope="col">Temp. Low (°F)</th>
+                                                <th scope="col">Wind Speed (mph)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let column of dailyData; index as i">
+                                                <th scope="row">{{ i + 1 }}</th>
+                                                <td (click)="updateDetails(i)"><a href='javascript:;'><u>
+                                                            {{column.startTime | date:'EEEE, d MMM y'}}</u></a></td>
+
+
+                                                <td>
+                                                    <span>
+                                                        <img [src]="'./assets/images/' + weatherCodeString[column.values.weatherCode][1]"
+                                                            width="30px" height="auto">{{
+                                                        weatherCodeString[column.values.weatherCode][0] }}
+
+                                                    </span>
+
+                                                </td>
+                                                <td>{{column.values.temperatureMax}}</td>
+                                                <td>{{column.values.temperatureMin}}</td>
+                                                <td>{{column.values.windSpeed}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink><small>Daily Temp. Chart</small></a>
+                        <ng-template ngbNavContent>
+                            <app-daily-temp-chart [dailyData]="resultData.daily.data.timelines[0].intervals">
+                            </app-daily-temp-chart>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink><small>Meteogram</small></a>
+                        <ng-template ngbNavContent>
+                            <app-meteogram [hourlyData]="resultData.hourly"></app-meteogram>
+                        </ng-template>
+                    </li>
+                </ul>
+                <div [ngbNavOutlet]="nav"></div>
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+        <div *ngIf="detailShow" [@slideLeft] id="view2" class="col-sm-12">
+
+
+            <button type="button" class="btn btn-outline-dark btn-sm mr-2" style="float:left; "
+                (click)="handleDetails()">
+                <span class="material-icons" style="vertical-align: bottom;">
+                    chevron_left
+                </span>List </button>
+
+            <div style="float: right; margin-right: 2%;">
+                <a class="twitter-share-button"
+                    href="https://twitter.com/intent/tweet?text=The temperature in {{currentDetailData.currentLocation.street}} {{currentDetailData.currentLocation.city}}, {{currentDetailData.currentLocation.state}} on {{currentDetailData.currentData.sunriseTime | date:'EEEE, d MMM y' }} is {{currentDetailData.currentData.temperatureMax}} °F. The weather conditions are {{weatherCodeString[currentDetailData.currentData.weatherCode][0]}} &hashtags=CSCI571WeatherForecast"
+                    target="_blank">
+                    <button class="btn btn-sm" style="border: none; background-color: rgb(79, 112, 219); height: 30px;"><i class="bi bi-twitter" style="color: white "></i></button></a>
+            </div>
+            <div style="text-align:center;">
+                <b>{{currentDetailData.currentData.sunsetTime | date:'EEEE, d MMM y'}}</b>
+            </div>
+
+
+
+            <app-details [currentDetailData]="currentDetailData"></app-details>
+        </div>
+
+
+
+    </div>
+</div>

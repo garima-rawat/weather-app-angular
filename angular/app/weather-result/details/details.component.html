@@ -1,0 +1,121 @@
+<br>
+<br>
+
+<table class="table table-striped">
+    <thead>
+
+    </thead>
+    <tbody>
+        <tr>
+            <td class="col col-sm-4">
+                <b> Status </b>
+            </td>
+            <td>
+                {{weatherCodeString[currentDetailData.currentData.weatherCode][0] }}
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <b>Max Temperature </b>
+            </td>
+            <td>
+                {{currentDetailData.currentData.temperatureMax}} °F
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <b>Min Temperature </b>
+            </td>
+            <td>
+                {{currentDetailData.currentData.temperatureMin}} °F
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <b> Apparent Temperature </b>
+            </td>
+            <td>
+                {{currentDetailData.currentData.temperatureApparent}} °F
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <b> Sun Rise Time </b>
+            </td>
+            <td>
+                {{currentDetailData.currentData.sunriseTime | slice:11:19 }}
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <b>Sun Set Time </b>
+            </td>
+            <td>
+                {{currentDetailData.currentData.sunsetTime | slice:11:19}}
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <b>Humidity </b>
+            </td>
+            <td>
+                {{currentDetailData.currentData.humidity}}%
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <b> Wind Speed </b>
+            </td>
+            <td>
+                {{currentDetailData.currentData.windSpeed}}mph
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                <b> Visibility </b>
+            </td>
+            <td>
+                {{currentDetailData.currentData.visibility}}mi
+            </td>
+
+        </tr>
+
+        <!-- <tr>
+            <td>
+                <b>Moon Phase </b>
+            </td>
+            <td>
+                {{currentDetailData.currentData.moonPhase}}
+            </td>
+
+        </tr> -->
+
+        <tr>
+            <td>
+                <b>Cloud Cover </b>
+            </td>
+            <td>
+                {{currentDetailData.currentData.cloudCover}}%
+            </td>
+
+        </tr>
+
+    </tbody>
+</table>
+
+<app-details-map [selectedLocation]="currentDetailData.currentLocation"></app-details-map>

@@ -1,0 +1,31 @@
+<br>
+<div id="day-table">
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="row" >#</th>
+                <th scope="col" class="col col-sm col-md">Date</th>
+                <th scope="col" class="col col-sm-6 col-md-6 col-xl-6">Status</th>
+                <th scope="col" class="col col-sm col-md">Temp. High (F)</th>
+                <th scope="col" class="col col-sm col-md">Temp. Low (F)</th>
+                <th scope="col" class="col col-sm col-md">Wind Speed (mph)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let column of dailyData; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td class="col col-sm col-md"><a href='https://www.facebook.com'>{{column.startTime | date:'fullDate'}}</a></td>
+
+                <td class="col col-sm-6 col-md-6 col-xl-6">
+                    <img [src]="'./assets/images/' + weatherCodeString[column.values.weatherCode][1]" class="mr-2"
+                        style="width: 20px">
+                    {{ weatherCodeString[column.values.weatherCode][0] }}
+                </td>
+                <td class="col col-sm col-md">{{column.values.temperatureMax}}</td>
+                <td class="col col-sm col-md">{{column.values.temperatureMin}}</td>
+                <td class="col col-sm col-md">{{column.values.windSpeed}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

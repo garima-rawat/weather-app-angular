@@ -1,0 +1,22 @@
+.fit-center{
+    display: flex;
+    justify-content: center;
+}
+p{
+    text-align:center
+}
+#resultButton{
+    text-align: center;
+}
+#favouriteButton{
+    margin-left: 30px;
+
+}
+
+.fav-class:active{
+    background-color: #0071fe;
+}
+
+.resul-class:active{
+    background-color: #0071fe;
+}
